@@ -17,16 +17,13 @@
     <body>
       <!-- Navegación -->
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-          <a class="navbar-brand" href="{% url 'home' %}">GreenSeed</a>
+        <div class="container">       
+          <a class="navbar-brand" href="{% url 'home' %}"><img class="logo-color" src="{% static 'core/img/Imagen2.png' %}" alt="greenseed" width="160" height="60"></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ned" aria-controls="ned" aria-expanded="false">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="ned">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'home' %}">Inicio</a>
-              </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'blog' %}">Blog</a>
               </li>
@@ -50,6 +47,9 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'prestamos:listMe' %}">Mis proyectos</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Solicitudes Recibidas</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'inversionistas:listOfertas' %}">Mis Ofertas</a>

@@ -27,6 +27,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'home' %}">Inicio</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+              </li>
             </ul>
             <ul class="navbar-nav">
               {% if not request.user.is_authenticated %}
@@ -43,6 +46,9 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'profiles:list' %}">Perfiles</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'messenger:list' %}">Mensanjes</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'prestamos:list' %}">Proyectos</a>

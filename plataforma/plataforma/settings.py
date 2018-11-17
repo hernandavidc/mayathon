@@ -49,6 +49,7 @@ LOCAL_APPS = [
     'messenger',
     'prestamos',
     'investment',
+    'blog',
 ]
 
 THIRD_PARTY_APPS = [

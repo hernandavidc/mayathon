@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from profiles.urls import profiles_patterns
+from messenger.urls import messenger_patterns
 from .views import HomePageView
 
 from django.conf import settings
@@ -23,7 +24,8 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomePageView.as_view(), name="home"),
-    path('', include(profiles_patterns)),
+    path('perfiles/', include(profiles_patterns)),
+    path('messenger/', include(messenger_patterns)),
     #Paths de Auth
     path('accounts/', include('django.contrib.auth.urls')),
     path('cuenta/', include('registration.urls')),

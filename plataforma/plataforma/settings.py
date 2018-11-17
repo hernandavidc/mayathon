@@ -46,6 +46,7 @@ LOCAL_APPS = [
     'plataforma',
     'registration',
     'profiles',
+    'messenger',
 ]
 
 THIRD_PARTY_APPS = [
@@ -135,7 +136,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 #auth redirect
-LOGIN_REDIRECT_URL = 'profiles:inicio'
+LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
 #Media Files

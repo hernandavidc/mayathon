@@ -38,7 +38,9 @@
                     <a class="nav-link" href="{% url 'signup' %}">Registro</a>
                   </li> 
               {% else %}
-                Con sesion!!
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'profiles:list' %}">Perfiles</a>
+                </li>
               {% endif %}
             </ul>
           </div>

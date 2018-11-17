@@ -19,6 +19,7 @@
             {% for thread in request.user.threads.all %}
               <!-- Sólo mostraremos un Thread si tiene como mínimo 1 mensaje -->
               {% if thread.messages.all|length > 0 %}
+                <h3>Otras conversaciones</h3>
                 <div class="mb-3">
                   <!-- Recorremos los miembros del hilo menos el propio request.user -->
                   {% for user in thread.users.all %}

@@ -10,6 +10,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Solicitudes
 from .forms import SolicitudAdd
 
+
 class SolicitudesList(ListView):
     model = Solicitudes
     template_name = "prestamos/list_solicitudes.html"

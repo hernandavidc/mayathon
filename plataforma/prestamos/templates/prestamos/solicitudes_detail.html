@@ -23,6 +23,7 @@
     {% elif request.user.is_authenticated %}
         <h3>¿Te intereza apoyar el proyecto?</h3>
         <a href="#" class="plus-a"><i class="fa fa-envelope" aria-hidden="true"></i>Contactar</a>
+        <a href="{% url 'inversionistas:ofertar' solicitudes.id %}" class="plus-a"><i class="fa fa-money" aria-hidden="true"></i>Apoyar</a>
     {% endif %}
 </div>
 {% endblock %}

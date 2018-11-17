@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Mis Ofertas{% endblock %}
+{% block content %}
+<table class="table table-hover">
+<thead>
+    <tr>
+        <th>Inversionista</th>
+        <th>No.Solicitud</th>
+        <th>Solicitud</th>
+        <th>Monto</th>
+        <th>Estado</th>
+        <th></th>
+    </tr>
+</thead>
+{% for oferta in inversionistassolicitudes_list %}
+    <tbody>
+        <tr>
+            <td>{{ oferta.inversionista }}</td>
+            <td>{{ oferta.solicitud.id }}</td>
+            <td>{{ oferta.solicitud.nombre }}</td>
+            <td>{{ oferta.inversion }}</td>
+            <td>{{ oferta.get_estado_display }}</td>
+        </tr>
+    </tbody>
+{% endfor %}
+</table>
+{% endblock %}

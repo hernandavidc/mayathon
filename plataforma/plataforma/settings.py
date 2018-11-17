@@ -48,6 +48,7 @@ LOCAL_APPS = [
     'profiles',
     'messenger',
     'prestamos',
+    'investment',
 ]
 
 THIRD_PARTY_APPS = [

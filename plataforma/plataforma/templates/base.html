@@ -51,6 +51,9 @@
                   <a class="nav-link" href="{% url 'prestamos:listMe' %}">Mis proyectos</a>
                 </li>
                 <li class="nav-item">
+                  <a class="nav-link" href="{% url 'inversionistas:listOfertas' %}">Mis Ofertas</a>
+                </li>
+                <li class="nav-item">
                   <a class="nav-link" href="{% url 'logout' %}">Salir</a>
                 </li>
               {% endif %}
@@ -63,9 +66,10 @@
       {% block content %}{% endblock %}
       </section>
       <!-- Javascript -->
-      {% block Js %}{% endblock %}
+      
       <script src="{% static 'core/vendor/jquery/jquery.min.js' %}"></script>
       <script src="{% static 'core/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
       <script src="{% static 'core/js/main.js' %}"></script>
+      {% block Js %}{% endblock %}
   </body>
 </html>

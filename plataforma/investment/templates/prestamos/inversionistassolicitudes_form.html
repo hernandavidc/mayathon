@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Ofertar{% endblock %}
+{% block content %}
+<div class="col-md-10 col-md-offset-1">
+<form action="" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="col-md-6">
+            <label class="mylabel">{{ field.label }}</label>
+            {{ field }}
+        </div>
+    {% endfor %}
+    <input type="hidden" name="id" value="" id="id"/>
+    <div class="text-center">
+        <input class="btn btn-primary btn-block" type="submit" value="¡Ofertar!" />
+    </div>
+</form>
+</div>
+{% endblock %}
+{% block Js %}
+    <script> 
+        $(function(){
+            id = $(location).attr("href").split("/")[4];
+            $("#id").val(id);
+        });
+    </script>
+{% endblock %}

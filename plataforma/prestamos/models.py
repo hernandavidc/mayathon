@@ -42,6 +42,7 @@ class Solicitudes(models.Model):
     duracion = models.IntegerField()
     nombre = models.CharField(max_length=20)
     valor = models.IntegerField()
+    valor_Faltante = models.IntegerField()
     descripcion = RichTextField(verbose_name="Contenido")
     youtube = models.URLField(max_length=200, null=True, blank=True)
     estado = models.CharField(max_length=1, choices= ESTADO_CHOICE, default='p')
@@ -51,12 +52,18 @@ class Solicitudes(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.nombre
+
 
 class Parametros(models.Model):
     nombre = models.TextField()
     valor = models.IntegerField()
     created = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.nombre
 
 class SolicitudesParametros(models.Model):
     solicitud = models.ForeignKey(Solicitudes, on_delete=models.PROTECT)

@@ -35,3 +35,7 @@ class SolicitudAdd(CreateView):
             camara.save()
             return HttpResponseRedirect('/mis-proyectos/?ok')
         return render(request, self.template_name, {'form': form})
+
+@method_decorator(login_required, name="dispatch")
+class serviceDetail(DetailView):
+    model = Solicitudes

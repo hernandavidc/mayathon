@@ -2,13 +2,27 @@
 {% load static %}
 {% block title %}{% endblock %}
 {% block content %}
-<p><b>Id: </b>{{solicitudes.id}}</p>
-<p><b>Representante: </b>{{solicitudes.solicitante.username}}</p>
-<p><b>Creado: </b>{{solicitudes.created}}</p>
-<p><b>Nombre: </b>{{solicitudes.nombre}}</p>
-<p><b>Descripción: </b>{{solicitudes.descripcion}}</p>
-<p><b>Valor: </b>{{solicitudes.valor}}</p>
-<p><b>Youtube: </b>{{solicitudes.youtube}}</p>
-<p><b>Estado: </b>{{solicitudes.estado}}</p>
-<p><b>Categoria: </b>{{solicitudes.categoria.nombre}}</p>
+<div class="row">
+    <div class="col-sm-6">
+        <p><b>Id: </b>{{solicitudes.id}}</p>
+        <p><b>Representante: </b>{{solicitudes.solicitante.username}}</p>
+        <p><b>Creado: </b>{{solicitudes.created}}</p>
+        <p><b>Nombre: </b>{{solicitudes.nombre}}</p>
+    </div>
+    <div class="col-sm-6">
+        <p><b>Valor: </b>{{solicitudes.valor}}</p>
+        <p><b>Youtube: </b>{{solicitudes.youtube}}</p>
+        <p><b>Estado: </b>{{solicitudes.get_estado_display }}</p>
+        <p><b>Categoria: </b>{{solicitudes.categoria.nombre}}</p>
+    </div>
+    <div class="col-sm-12"><p><b>Descripción: </b>{{solicitudes.descripcion}}</p></div>
+    {% if request.user == solicitudes.solicitante %}
+        <h3>Documentos adjuntos</h3><br>
+        <p>Falta listarlos y agregarlos</p>
+        <a href="#" class="plus-a"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar documento</a>
+    {% elif request.user.is_authenticated %}
+        <h3>¿Te intereza apoyar el proyecto?</h3>
+        <a href="#" class="plus-a"><i class="fa fa-envelope" aria-hidden="true"></i>Contactar</a>
+    {% endif %}
+</div>
 {% endblock %}

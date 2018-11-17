@@ -67,7 +67,7 @@ class InversionistasSolicitudes(models.Model):
     inversionista = models.ForeignKey(User, on_delete=models.PROTECT)
     solicitud = models.ForeignKey(Solicitudes, on_delete=models.PROTECT)
     inversion = models.IntegerField()
-    estado = models.CharField(max_length=1, choices= ESTADO_INVERSION)
+    estado = models.CharField(max_length=1, choices= ESTADO_INVERSION, default='s')
     created = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
     

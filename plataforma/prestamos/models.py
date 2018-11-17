@@ -7,6 +7,15 @@ ESTADO_CHOICE = (
      ('p','Proceso'),
 )
 
+ESTADO_INVERSION = (
+    ('s','Solicitado'),
+    ('a','Aceptado'),
+    ('r','Rechazado'),
+    ('t','Inversión retornada'),
+    ('z','Inversión realizada'),
+    ('m','Inversión en mora'),
+)
+
 def custom_upload_to(instance, filename):
     old_instance = SolicitudesParametros.objects.get(pk=instance.pk)
     old_instance.archivo.delete()
@@ -20,6 +29,12 @@ class Categorias(models.Model):
     def __str__(self):
         return self.nombre
 
+class NivelesDeRiesgo(models.Model):
+    limiteInferior = models.IntegerField()
+    limiteSuperior = models.IntegerField()
+    riesgo = models.CharField(max_length=10)
+    porcentaje = models.DecimalField(max_digits=2, decimal_places=2)
+
 class Solicitudes(models.Model):
     fecha_inicio = models.DateField(null=True, blank=True)
     duracion = models.IntegerField()
@@ -30,6 +45,7 @@ class Solicitudes(models.Model):
     estado = models.CharField(max_length=1, choices= ESTADO_CHOICE)
     solicitante = models.ForeignKey(User, on_delete=models.PROTECT)
     categoria = models.ForeignKey(Categorias, on_delete=models.PROTECT)
+    nivelDeRiesgo = models.ForeignKey(NivelesDeRiesgo, on_delete=models.PROTECT)
     created = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
 
@@ -51,7 +67,7 @@ class InversionistasSolicitudes(models.Model):
     inversionista = models.ForeignKey(User, on_delete=models.PROTECT)
     solicitud = models.ForeignKey(Solicitudes, on_delete=models.PROTECT)
     inversion = models.IntegerField()
-    estado = models.BooleanField()
+    estado = models.CharField(max_length=1, choices= ESTADO_INVERSION)
     created = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
     

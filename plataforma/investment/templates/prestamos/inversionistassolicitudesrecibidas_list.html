@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Mis Ofertas{% endblock %}
+{% block content %}
+{% if 'ok' in request.GET %}
+<div class="alert alert-success" role="alert">
+    El prestamo fue aceptado correctamente!
+</div>
+{% elif 'ok-n' in request.GET %}
+<div class="alert alert-success" role="alert">
+    El prestamo fue rechazado correctamente!
+</div>
+{% endif %}
+<table class="table table-hover">
+<thead>
+    <tr>
+        <th>Inversionista</th>
+        <th>No.Solicitud</th>
+        <th>Solicitud</th>
+        <th>Monto</th>
+        <th>Nivel de Riesgo</th>
+        <th>Estado</th>
+        <th></th>
+        <th></th>
+    </tr>
+</thead>
+{% for oferta in inversionistassolicitudes_list %}
+    <tbody>
+        <tr>
+            <td>{{ oferta.inversionista }}</td>
+            <td>{{ oferta.solicitud.id }}</td>
+            <td>{{ oferta.solicitud.nombre }}</td>
+            <td>{{ oferta.inversion }}</td>
+            <td>{{ oferta.solicitud.nivelDeRiesgo.riesgo }}</td>
+            <td>{{ oferta.get_estado_display }}</td>
+            {% if oferta.estado == 's' %}
+            <td><a href="{% url 'inversionistas:add' oferta.id %}" style="color:#88e088;"><i class="fa fa-check-circle"></i></a></td>
+            <td><a href="{% url 'inversionistas:decline' oferta.id %}" style="color: #d97474;"><i class="fa fa-times-circle"></i></a></td>
+            {% else %}
+            <th></th>
+            <th></th>
+            {% endif %}
+        </tr>
+    </tbody>
+{% endfor %}
+</table>
+{% endblock %}

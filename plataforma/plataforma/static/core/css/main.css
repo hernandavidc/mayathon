@@ -42,3 +42,9 @@ footer p {
 .box-shadow { 
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); 
 }
+
+.btn-primary {
+    color: #fff;
+    background-color: #1e7e34 !important;
+    border-color: #28a745 !important;
+}

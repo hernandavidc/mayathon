@@ -29,18 +29,19 @@ class SolicitudAdd(CreateView):
     model = Solicitudes
     form_class = SolicitudAdd
     success_url = reverse_lazy('prestamos:listMe')
+    template_name = 'prestamos/solicitudes_form.html'
 
     def post(self, request, *args, **kwargs):
         print(request.POST)
         form = self.form_class(request.POST)
-        if form.is_valid():
+        if form.is_valid() and len(Solicitudes.objects.filter(solicitante=self.request.user)) < 3:
             solicitud = form.save(commit=False)
             solicitud.solicitante = request.user
             solicitud.nivelDeRiesgo = NivelesDeRiesgo.objects.get(id=4)
             solicitud.valor_Faltante = solicitud.valor
             solicitud.save()
             return HttpResponseRedirect('/mis-proyectos/?ok')
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'error':'No puedes publicar más de 3 solicitudes'})
 
 @method_decorator(login_required, name="dispatch")
 class solicitudesDetail(DetailView):

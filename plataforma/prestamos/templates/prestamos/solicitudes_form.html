@@ -2,6 +2,11 @@
 {% load static %}
 {% block title %}Añadir solicitud{% endblock %}
 {% block content %}
+{% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{error}}
+    </div>
+{% endif %}
 <div class="col-md-10 col-md-offset-1">
 <form action="" method="post">
     {% csrf_token %}

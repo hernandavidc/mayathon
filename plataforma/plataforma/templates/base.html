@@ -56,7 +56,9 @@
         </div>
       </nav>
       <!-- Contenido -->
+      <section class="container" style="margin-top:15px;">
       {% block content %}{% endblock %}
+      </section>
       <!-- Javascript -->
       {% block Js %}{% endblock %}
       <script src="{% static 'core/vendor/jquery/jquery.min.js' %}"></script>

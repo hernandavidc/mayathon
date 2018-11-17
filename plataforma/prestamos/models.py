@@ -47,7 +47,7 @@ class Solicitudes(models.Model):
     estado = models.CharField(max_length=1, choices= ESTADO_CHOICE, default='p')
     solicitante = models.ForeignKey(User, on_delete=models.PROTECT)
     categoria = models.ForeignKey(Categorias, on_delete=models.PROTECT)
-    nivelDeRiesgo = models.ForeignKey(NivelesDeRiesgo, on_delete=models.PROTECT)
+    nivelDeRiesgo = models.ForeignKey(NivelesDeRiesgo, on_delete=models.PROTECT, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
 

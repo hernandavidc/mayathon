@@ -30,6 +30,8 @@ urlpatterns = [
     path('messenger/', include(messenger_patterns)),
     path('', include(prestamos_patterns)),
     path('',include(inversionista_patterns)),
+    #blog
+    path('blog/', include('blog.urls')),
     #Paths de Auth
     path('accounts/', include('django.contrib.auth.urls')),
     path('cuenta/', include('registration.urls')),

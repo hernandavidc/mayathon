@@ -70,3 +70,28 @@ class MisOfertasList(ListView):
 
     def get_queryset(self):
         return InversionistasSolicitudes.objects.filter(inversionista=self.request.user)
+
+@login_required
+def ofertaRecibidaAdd(request, pk):
+    solicitudFinanciacion = InversionistasSolicitudes.objects.get(id = pk)
+    proyecto = solicitudFinanciacion.solicitud
+    inversor = solicitudFinanciacion.inversionista
+    solicitudFinanciacion.estado = 'a'
+    solicitudFinanciacion.save()
+    proyecto.valor_Faltante -= solicitudFinanciacion.inversion
+    proyecto.save()
+    inversor.notificacion = 1
+    inversor.save()
+
+    return HttpResponseRedirect('/solicitudes/?ok')
+
+@login_required
+def ofertaRecibidaDecline(request, pk):
+    solicitudFinanciacion = InversionistasSolicitudes.objects.get(id = pk)
+    inversor = solicitudFinanciacion.inversionista
+    solicitudFinanciacion.estado = 'r'
+    solicitudFinanciacion.save()
+    inversor.notificacion = 1
+    inversor.save()
+
+    return HttpResponseRedirect('/solicitudes/?ok-n')

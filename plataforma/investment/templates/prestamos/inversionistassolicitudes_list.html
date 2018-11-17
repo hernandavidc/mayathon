@@ -9,6 +9,7 @@
         <th>No.Solicitud</th>
         <th>Solicitud</th>
         <th>Monto</th>
+        <th>Nivel de Riesgo</th>
         <th>Estado</th>
         <th></th>
     </tr>
@@ -20,6 +21,7 @@
             <td>{{ oferta.solicitud.id }}</td>
             <td>{{ oferta.solicitud.nombre }}</td>
             <td>{{ oferta.inversion }}</td>
+            <td>{{ oferta.solicitud.nivelDeRiesgo.riesgo }}</td>
             <td>{{ oferta.get_estado_display }}</td>
         </tr>
     </tbody>

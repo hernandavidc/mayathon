@@ -37,6 +37,7 @@ class SolicitudAdd(CreateView):
             solicitud = form.save(commit=False)
             solicitud.solicitante = request.user
             solicitud.nivelDeRiesgo = NivelesDeRiesgo.objects.get(id=4)
+            solicitud.valor_Faltante = solicitud.valor
             solicitud.save()
             return HttpResponseRedirect('/mis-proyectos/?ok')
         return render(request, self.template_name, {'form': form})

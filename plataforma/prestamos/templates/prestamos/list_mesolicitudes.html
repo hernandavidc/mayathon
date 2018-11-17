@@ -15,6 +15,7 @@
         <th>Duracion</th>
         <th>Categoria</th>
         <th>Estado</th>
+        <th>Riesgo</th>
         <th></th>
     </tr>
 </thead>
@@ -26,6 +27,7 @@
             <td>{{ solicitud.duracion }}</td>
             <td>{{ solicitud.categoria.nombre }}</td>
             <td>{{ solicitud.get_estado_display }}</td>
+            <td>{{ solicitud.nivelDeRiesgo.riesgo }}</td>
             <td><a class="nav-link" href="{% url 'prestamos:Detail' solicitud.id %}">Ir</a></td>
         </tr>
     </tbody>

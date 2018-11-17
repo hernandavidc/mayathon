@@ -7,10 +7,11 @@
     <tr>
         <th>Nombre</th>
         <th>Representante</th>
-        <th>Descipción</th>
+        <th>Descripción</th>
         <th>Valor</th>
         <th>Duracion</th>
         <th>Categoria</th>
+        <th>Riesgo</th>
         <th></th>
     </tr>
 </thead>
@@ -23,6 +24,7 @@
             <td>{{ solicitud.valor }}</td>
             <td>{{ solicitud.duracion }}</td>
             <td>{{ solicitud.categoria.nombre }}</td>
+            <td>{{ solicitud.nivelDeRiesgo.riesgo }}</td>
             {% if request.user.is_authenticated %}
                 <td><a class="nav-link" href="{% url 'prestamos:Detail' solicitud.id %}">Ir</a></td>
             {% endif %}

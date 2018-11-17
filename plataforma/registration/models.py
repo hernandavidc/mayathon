@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from prestamos.models import Rankings
 
 #instance hace referencia al objeto que se esta guardando
 def custom_upload_to(instance, filename):
@@ -15,7 +16,11 @@ class Profile(models.Model):
     avatar = models.ImageField(upload_to=custom_upload_to, null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
     link = models.URLField(max_length=200, null=True, blank=True)
-    
+    ranking = models.ForeignKey(Rankings, on_delete=models.PROTECT)
+    celphone = models.CharField(max_length=20)
+    account = models.IntegerField()
+
+
     class Meta:
         ordering = ['user__username']
 

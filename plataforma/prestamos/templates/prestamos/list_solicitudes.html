@@ -24,7 +24,7 @@
             <td>{{ solicitud.duracion }}</td>
             <td>{{ solicitud.categoria.nombre }}</td>
             {% if request.user.is_authenticated %}
-                <td>ir</td>
+                <td><a class="nav-link" href="{% url 'prestamos:Detail' solicitud.id %}">Ir</a></td>
             {% endif %}
         </tr>
     </tbody>

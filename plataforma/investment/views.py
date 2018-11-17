@@ -8,7 +8,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from prestamos.models import InversionistasSolicitudes
+from prestamos.models import InversionistasSolicitudes, So
 from prestamos.models import Solicitudes
 from .forms import Ofertar
 
@@ -56,8 +56,16 @@ class Ofertar(CreateView):
     #     return render(request, self.template_name, {'form': form})#
             
 @method_decorator(login_required, name="dispatch")
-class MisOfertasList(ListView):
+class MisOfertasRecibidasList(ListView):
+    template_name = "prestamos/inversionistassolicitudesrecibidas_list.html"
 
+    def get_queryset(self):
+        persona = self.request.user
+        
+        return InversionistasSolicitudes.objects.filter(solicitud.solicitante=self.request.user)
+
+@method_decorator(login_required, name="dispatch")
+class MisOfertasList(ListView):
     template_name = "prestamos/inversionistassolicitudes_list.html"
 
     def get_queryset(self):

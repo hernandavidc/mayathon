@@ -25,8 +25,8 @@
             <td>{{ solicitud.valor }}</td>
             <td>{{ solicitud.duracion }}</td>
             <td>{{ solicitud.categoria.nombre }}</td>
-            <td>{{ solicitud.estado }}</td>
-            <td>ir</td>
+            <td>{{ solicitud.get_estado_display }}</td>
+            <td><a class="nav-link" href="{% url 'prestamos:Detail' solicitud.id %}">Ir</a></td>
         </tr>
     </tbody>
 {% endfor %}

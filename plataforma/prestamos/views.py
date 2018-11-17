@@ -7,7 +7,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .models import Solicitudes
+from .models import Solicitudes, NivelesDeRiesgo
 from .forms import SolicitudAdd
 
 class SolicitudesList(ListView):
@@ -15,7 +15,7 @@ class SolicitudesList(ListView):
     template_name = "prestamos/list_solicitudes.html"
 
     def get_queryset(self):
-        return Solicitudes.objects.filter(estado='p')
+        return Solicitudes.objects.filter(estado='p').exclude(nivelDeRiesgo=NivelesDeRiesgo.objects.get(id=4))
 
 @method_decorator(login_required, name="dispatch")
 class MeSolicitudesList(ListView):
@@ -36,6 +36,7 @@ class SolicitudAdd(CreateView):
         if form.is_valid():
             solicitud = form.save(commit=False)
             solicitud.solicitante = request.user
+            solicitud.nivelDeRiesgo = NivelesDeRiesgo.objects.get(id=4)
             solicitud.save()
             return HttpResponseRedirect('/mis-proyectos/?ok')
         return render(request, self.template_name, {'form': form})

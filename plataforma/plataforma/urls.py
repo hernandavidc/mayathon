@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from profiles.urls import profiles_patterns
 from messenger.urls import messenger_patterns
+from prestamos.urls import prestamos_patterns
 from .views import HomePageView
 
 from django.conf import settings
@@ -26,6 +27,7 @@ urlpatterns = [
     path('', HomePageView.as_view(), name="home"),
     path('perfiles/', include(profiles_patterns)),
     path('messenger/', include(messenger_patterns)),
+    path('', include(prestamos_patterns)),
     #Paths de Auth
     path('accounts/', include('django.contrib.auth.urls')),
     path('cuenta/', include('registration.urls')),

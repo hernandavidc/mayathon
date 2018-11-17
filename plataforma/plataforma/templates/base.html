@@ -39,7 +39,16 @@
                   </li> 
               {% else %}
                 <li class="nav-item">
+                  <b class="nav-link">{{ request.user.username }}</b>
+                </li>
+                <li class="nav-item">
                   <a class="nav-link" href="{% url 'profiles:list' %}">Perfiles</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Proyectos</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Mis proyectos</a>
                 </li>
               {% endif %}
             </ul>

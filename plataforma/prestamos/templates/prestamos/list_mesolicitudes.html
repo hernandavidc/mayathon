@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Mis proyectos{% endblock %}
+{% block content %}
+{% if 'ok' in request.GET %}
+<p class="bg-info">
+    Mascota agregada correctamente. 
+</p>
+{% endif %}
+<table class="table table-hover">
+<thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Descipción</th>
+        <th>Valor</th>
+        <th>Duracion</th>
+        <th>Categoria</th>
+    </tr>
+</thead>
+{% for solicitud in solicitudes_list %}
+    <tbody>
+        <tr>
+            <td>{{ solicitud.nombre }}</td>
+            <td>{{ solicitud.descripcion }}</td>
+            <td>{{ solicitud.valor }}</td>
+            <td>{{ solicitud.duracion }}</td>
+            <td>{{ solicitud.categoria.nombre }}</td>
+        </tr>
+    </tbody>
+{% endfor %}
+</table>
+<a href="{% url 'prestamos:add' %}" class="plus-a"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+         
+{% endblock %}

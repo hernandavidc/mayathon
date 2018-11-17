@@ -1,6 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User 
 
+ESTADO_CHOICE = (
+     ('a','Aceptado'),
+     ('r','Rechazado'),
+     ('p','Proceso'),
+)
+
 def custom_upload_to(instance, filename):
     old_instance = SolicitudesParametros.objects.get(pk=instance.pk)
     old_instance.archivo.delete()
@@ -11,20 +17,17 @@ class Categorias(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
 
-class Estados(models.Model):
-    nombre = models.CharField(max_length=20)
-    created = models.DateTimeField(auto_now_add=True)
-    update = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.nombre
 
 class Solicitudes(models.Model):
-    fecha_solicitud = models.DateField()
-    fecha_inicio = models.DateField()
+    fecha_inicio = models.DateField(null=True, blank=True)
     duracion = models.IntegerField()
     nombre = models.CharField(max_length=20)
     valor = models.IntegerField()
     descripcion = models.TextField()
     youtube = models.URLField(max_length=200, null=True, blank=True)
-    estado = models.ForeignKey(Estados, on_delete=models.PROTECT)
+    estado = models.CharField(max_length=1, choices= ESTADO_CHOICE)
     solicitante = models.ForeignKey(User, on_delete=models.PROTECT)
     categoria = models.ForeignKey(Categorias, on_delete=models.PROTECT)
     created = models.DateTimeField(auto_now_add=True)

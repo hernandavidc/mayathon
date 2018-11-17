@@ -42,7 +42,7 @@ class Solicitudes(models.Model):
     valor = models.IntegerField()
     descripcion = models.TextField()
     youtube = models.URLField(max_length=200, null=True, blank=True)
-    estado = models.CharField(max_length=1, choices= ESTADO_CHOICE)
+    estado = models.CharField(max_length=1, choices= ESTADO_CHOICE, default='p')
     solicitante = models.ForeignKey(User, on_delete=models.PROTECT)
     categoria = models.ForeignKey(Categorias, on_delete=models.PROTECT)
     nivelDeRiesgo = models.ForeignKey(NivelesDeRiesgo, on_delete=models.PROTECT)

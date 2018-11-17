@@ -3,9 +3,9 @@
 {% block title %}Mis proyectos{% endblock %}
 {% block content %}
 {% if 'ok' in request.GET %}
-<p class="bg-info">
-    Solicitud agregada correctamente. 
-</p>
+<div class="alert alert-success" role="alert">
+    Solicitud agregada correctamente.
+</div>
 {% endif %}
 <table class="table table-hover">
 <thead>

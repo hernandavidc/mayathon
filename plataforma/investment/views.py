@@ -56,8 +56,16 @@ class Ofertar(CreateView):
     #     return render(request, self.template_name, {'form': form})#
             
 @method_decorator(login_required, name="dispatch")
-class MisOfertasList(ListView):
+class MisOfertasRecibidasList(ListView):
+    template_name = "prestamos/inversionistassolicitudesrecibidas_list.html"
 
+    def get_queryset(self):
+        solicitudes = self.request.user.get_solicitudes.all()
+
+        return InversionistasSolicitudes.objects.filter(solicitud__in=solicitudes)
+
+@method_decorator(login_required, name="dispatch")
+class MisOfertasList(ListView):
     template_name = "prestamos/inversionistassolicitudes_list.html"
 
     def get_queryset(self):

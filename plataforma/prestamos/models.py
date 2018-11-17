@@ -46,7 +46,7 @@ class Solicitudes(models.Model):
     descripcion = RichTextField(verbose_name="Contenido")
     youtube = models.URLField(max_length=200, null=True, blank=True)
     estado = models.CharField(max_length=1, choices= ESTADO_CHOICE, default='p')
-    solicitante = models.ForeignKey(User, on_delete=models.PROTECT)
+    solicitante = models.ForeignKey(User, related_name="get_solicitudes", on_delete=models.PROTECT)
     categoria = models.ForeignKey(Categorias, on_delete=models.PROTECT)
     nivelDeRiesgo = models.ForeignKey(NivelesDeRiesgo, on_delete=models.PROTECT, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)

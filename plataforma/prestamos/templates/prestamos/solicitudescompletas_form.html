@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Completar solicitud{% endblock %}
+{% block content %}
+{% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{error}}
+    </div>
+{% endif %}
+<div class="col-md-10 col-md-offset-1">
+
+<form action="{% url 'prestamos:guardar' solicitud.id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for p in parametros %}
+        <div class="col-md-6">
+            
+            <label class="mylabel">{{ p.parametro }}</label>
+            {% if p.archivo %}
+            {{ p.archivo }}
+            {% else %}
+            <p> No has anexado ningún documento </p>
+            {% endif %}
+            <input type="file" name="{{ p.parametro }}" class="form-control-file mt-3" id="id_{{ p.parametro }}" value="">
+        </div>
+    {% endfor %}
+    <div class="text-center">
+        <input class="btn btn-primary btn-block" type="submit" value="Agregar solicitud" />
+    </div>
+</form>
+</div>
+{% endblock %}

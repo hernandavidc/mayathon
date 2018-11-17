@@ -6,8 +6,9 @@ from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .forms import UploadFileForm
 
-from .models import Solicitudes, NivelesDeRiesgo
+from .models import Solicitudes, NivelesDeRiesgo, Parametros, SolicitudesParametros
 from .forms import SolicitudAdd
 
 class SolicitudesList(ListView):
@@ -40,9 +41,44 @@ class SolicitudAdd(CreateView):
             solicitud.nivelDeRiesgo = NivelesDeRiesgo.objects.get(id=4)
             solicitud.valor_Faltante = solicitud.valor
             solicitud.save()
+            parametros = Parametros.objects.all()
+            for p in parametros:
+                solicitudesParametros = SolicitudesParametros()
+                solicitudesParametros.solicitud = solicitud
+                solicitudesParametros.parametro = p
+                solicitudesParametros.save()
             return HttpResponseRedirect('/mis-proyectos/?ok')
         return render(request, self.template_name, {'form': form, 'error':'No puedes publicar más de 3 solicitudes'})
 
 @method_decorator(login_required, name="dispatch")
 class solicitudesDetail(DetailView):
     model = Solicitudes
+
+@login_required
+def CompletarSolicitudes(request, solicitud):
+    template_name = 'prestamos/solicitudescompletas_form.html'
+
+    solicitud = Solicitudes.objects.get(id=solicitud)
+    parametros = SolicitudesParametros.objects.filter(solicitud=solicitud)
+    return render(request, template_name, {'solicitud': solicitud, 'parametros': parametros})
+
+@login_required
+def CompletarSolicitudesPost(request, solicitud):
+    template_name = 'prestamos/solicitudescompletas_form.html'
+    print(request.FILES)
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        for f in request.FILES:
+            if form.is_valid():
+                handle_uploaded_file(f)
+    else:
+        form = UploadFileForm()
+
+    solicitud = Solicitudes.objects.get(id=solicitud)
+    parametros = SolicitudesParametros.objects.filter(solicitud=solicitud)
+    return render(request, template_name, {'solicitud': solicitud, 'parametros': parametros}) 
+
+def handle_uploaded_file(f):
+    with open('some/file/name.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)

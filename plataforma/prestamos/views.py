@@ -14,6 +14,9 @@ class SolicitudesList(ListView):
     model = Solicitudes
     template_name = "prestamos/list_solicitudes.html"
 
+    def get_queryset(self):
+        return Solicitudes.objects.filter(estado='p')
+
 @method_decorator(login_required, name="dispatch")
 class MeSolicitudesList(ListView):
     template_name = "prestamos/list_mesolicitudes.html"
@@ -31,11 +34,12 @@ class SolicitudAdd(CreateView):
         print(request.POST)
         form = self.form_class(request.POST)
         if form.is_valid():
-            camara = form.save(commit=False)
-            camara.save()
+            solicitud = form.save(commit=False)
+            solicitud.solicitante = request.user
+            solicitud.save()
             return HttpResponseRedirect('/mis-proyectos/?ok')
         return render(request, self.template_name, {'form': form})
 
 @method_decorator(login_required, name="dispatch")
-class serviceDetail(DetailView):
+class solicitudesDetail(DetailView):
     model = Solicitudes

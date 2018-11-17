@@ -11,20 +11,22 @@
 <thead>
     <tr>
         <th>Nombre</th>
-        <th>Descipción</th>
         <th>Valor</th>
         <th>Duracion</th>
         <th>Categoria</th>
+        <th>Estado</th>
+        <th></th>
     </tr>
 </thead>
 {% for solicitud in solicitudes_list %}
     <tbody>
         <tr>
             <td>{{ solicitud.nombre }}</td>
-            <td>{{ solicitud.descripcion }}</td>
             <td>{{ solicitud.valor }}</td>
             <td>{{ solicitud.duracion }}</td>
             <td>{{ solicitud.categoria.nombre }}</td>
+            <td>{{ solicitud.estado }}</td>
+            <td>ir</td>
         </tr>
     </tbody>
 {% endfor %}

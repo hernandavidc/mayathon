@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block content %}
+<p><b>Id: </b>{{solicitudes.id}}</p>
+<p><b>Representante: </b>{{solicitudes.solicitante.username}}</p>
+<p><b>Creado: </b>{{solicitudes.created}}</p>
+<p><b>Nombre: </b>{{solicitudes.nombre}}</p>
+<p><b>Descripción: </b>{{solicitudes.descripcion}}</p>
+<p><b>Valor: </b>{{solicitudes.valor}}</p>
+<p><b>Youtube: </b>{{solicitudes.youtube}}</p>
+<p><b>Estado: </b>{{solicitudes.estado}}</p>
+<p><b>Categoria: </b>{{solicitudes.categoria.nombre}}</p>
+{% endblock %}

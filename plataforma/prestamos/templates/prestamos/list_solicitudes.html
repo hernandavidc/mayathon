@@ -6,20 +6,26 @@
 <thead>
     <tr>
         <th>Nombre</th>
+        <th>Representante</th>
         <th>Descipción</th>
         <th>Valor</th>
         <th>Duracion</th>
         <th>Categoria</th>
+        <th></th>
     </tr>
 </thead>
 {% for solicitud in solicitudes_list %}
     <tbody>
         <tr>
             <td>{{ solicitud.nombre }}</td>
+            <td>{{ solicitud.solicitante.username }}</td>
             <td>{{ solicitud.descripcion }}</td>
             <td>{{ solicitud.valor }}</td>
             <td>{{ solicitud.duracion }}</td>
             <td>{{ solicitud.categoria.nombre }}</td>
+            {% if request.user.is_authenticated %}
+                <td>ir</td>
+            {% endif %}
         </tr>
     </tbody>
 {% endfor %}

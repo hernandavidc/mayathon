@@ -15,7 +15,7 @@
         <p><b>Estado: </b>{{solicitudes.get_estado_display }}</p>
         <p><b>Categoria: </b>{{solicitudes.categoria.nombre}}</p>
     </div>
-    <div class="col-sm-12"><p><b>Descripción: </b>{{solicitudes.descripcion}}</p></div>
+    <div class="col-sm-12"><p><b>Descripción: </b>{{solicitudes.descripcion|safe}}</p></div>
     {% if request.user == solicitudes.solicitante %}
         <h3>Documentos adjuntos</h3><br>
         <p>Falta listarlos y agregarlos</p>

@@ -1,5 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User 
+from django.contrib.auth.models import User
+
+from ckeditor.fields import RichTextField
 
 ESTADO_CHOICE = (
      ('a','Aceptado'),
@@ -40,7 +42,7 @@ class Solicitudes(models.Model):
     duracion = models.IntegerField()
     nombre = models.CharField(max_length=20)
     valor = models.IntegerField()
-    descripcion = models.TextField()
+    descripcion = RichTextField(verbose_name="Contenido")
     youtube = models.URLField(max_length=200, null=True, blank=True)
     estado = models.CharField(max_length=1, choices= ESTADO_CHOICE, default='p')
     solicitante = models.ForeignKey(User, on_delete=models.PROTECT)

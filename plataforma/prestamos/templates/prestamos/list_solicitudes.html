@@ -19,7 +19,7 @@
         <tr>
             <td>{{ solicitud.nombre }}</td>
             <td>{{ solicitud.solicitante.username }}</td>
-            <td>{{ solicitud.descripcion }}</td>
+            <td>{{ solicitud.descripcion|striptags|safe|truncatechars:"100" }}</td>
             <td>{{ solicitud.valor }}</td>
             <td>{{ solicitud.duracion }}</td>
             <td>{{ solicitud.categoria.nombre }}</td>

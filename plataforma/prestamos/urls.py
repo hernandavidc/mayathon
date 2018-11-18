@@ -7,5 +7,5 @@ prestamos_patterns = ([
     path('proyecto/<int:pk>/', solicitudesDetail.as_view(), name='Detail'),
     path('proyecto/add/', SolicitudAdd.as_view(), name='add'),
     path('completar/<int:solicitud>/', CompletarSolicitudes, name='completar'),
-    path('guardar/<int:solicitud>/', CompletarSolicitudesPost, name='guardar')
+    path('guardar/', CompletarSolicitudesPost.as_view(), name='guardar')
 ], 'prestamos')

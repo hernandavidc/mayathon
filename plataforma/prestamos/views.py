@@ -6,10 +6,10 @@ from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .forms import UploadFileForm
+
 
 from .models import Solicitudes, NivelesDeRiesgo, Parametros, SolicitudesParametros
-from .forms import SolicitudAdd
+from .forms import SolicitudAdd, DocumentosForm
 
 class SolicitudesList(ListView):
     model = Solicitudes
@@ -62,23 +62,21 @@ def CompletarSolicitudes(request, solicitud):
     parametros = SolicitudesParametros.objects.filter(solicitud=solicitud)
     return render(request, template_name, {'solicitud': solicitud, 'parametros': parametros})
 
-@login_required
-def CompletarSolicitudesPost(request, solicitud):
+@method_decorator(login_required, name='dispatch')
+class CompletarSolicitudesPost(UpdateView):
     template_name = 'prestamos/solicitudescompletas_form.html'
-    print(request.FILES)
-    if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
-        for f in request.FILES:
-            if form.is_valid():
-                handle_uploaded_file(f)
-    else:
-        form = UploadFileForm()
+    
+    form_class = DocumentosForm
+    success_url = reverse_lazy('prestamos:guardar')
 
-    solicitud = Solicitudes.objects.get(id=solicitud)
-    parametros = SolicitudesParametros.objects.filter(solicitud=solicitud)
-    return render(request, template_name, {'solicitud': solicitud, 'parametros': parametros}) 
-
-def handle_uploaded_file(f):
-    with open('some/file/name.txt', 'wb+') as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
+    def post(self, request, *args, **kwargs):
+        #recuperamos el objeto que se va editar        
+        form = self.form_class(request.POST)
+        x = 10
+        if form.is_valid():
+            sp = form.save(commit=false)
+            x = sp.solicitud.id
+            sp.save()
+        #p = SolicitudesParametros.objects.get(id=self.request.POST['id'])
+        url = "/completar/" + str(x)
+        return HttpResponseRedirect(url)

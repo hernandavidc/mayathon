@@ -9,23 +9,25 @@
 {% endif %}
 <div class="col-md-10 col-md-offset-1">
 
-<form action="{% url 'prestamos:guardar' solicitud.id %}" method="post" enctype="multipart/form-data">
+{% for p in solicitud.get_parametros.all %}
+
+<form action="{% url 'prestamos:guardar' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {% for p in parametros %}
-        <div class="col-md-6">
-            
-            <label class="mylabel">{{ p.parametro }}</label>
-            {% if p.archivo %}
-            {{ p.archivo }}
-            {% else %}
-            <p> No has anexado ningún documento </p>
-            {% endif %}
-            <input type="file" name="{{ p.parametro }}" class="form-control-file mt-3" id="id_{{ p.parametro }}" value="">
-        </div>
-    {% endfor %}
+    {% if p.archivo %}
+
+        <p>Documento actual: {{p.archivo}} </p>
+        <input type="file" name="archivo" class="form-control-file mt-3" id="id_archivo" value = "{{p.archivo}}">
+    {% else %}
+        <input type="file" name="archivo" class="form-control-file mt-3" id="id_archivo">
+    {% endif %}
     <div class="text-center">
+        {{p.parametro}}
+        <input type="hidden" value="{{p.id}}" name="id" id='id'/>
         <input class="btn btn-primary btn-block" type="submit" value="Agregar solicitud" />
     </div>
 </form>
 </div>
+
+{% endfor %}
+
 {% endblock %}

@@ -66,7 +66,7 @@ class Parametros(models.Model):
         return self.nombre
 
 class SolicitudesParametros(models.Model):
-    solicitud = models.ForeignKey(Solicitudes, on_delete=models.PROTECT)
+    solicitud = models.ForeignKey(Solicitudes, related_name='get_parametros', on_delete=models.PROTECT)
     parametro = models.ForeignKey(Parametros, on_delete=models.PROTECT)
     archivo = models.FileField(upload_to=custom_upload_to, null=False, blank=False)
     created = models.DateTimeField(auto_now_add=True)

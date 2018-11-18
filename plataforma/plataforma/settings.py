@@ -145,3 +145,5 @@ LOGOUT_REDIRECT_URL = 'home'
 #Media Files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+DOCUMENTACION_URL = '/documentacion/'
+DOCUMENTACION_ROOT = os.path.join(BASE_DIR, 'documentacion')
